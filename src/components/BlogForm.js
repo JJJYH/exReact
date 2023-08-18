@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { bool } from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {useHistory} from 'react-router-dom';
 import {useParams} from 'react-router';
-import { v4 as uuidv4 } from 'uuid';
-import Toast from './Toast';
+import useToast from '../hooks/toast';
 
 const BlogForm = ({editing}) => {
     const {id} = useParams();
@@ -17,9 +16,11 @@ const BlogForm = ({editing}) => {
     const [originalPublish, setOriginalPublish] = useState(false);
     const [titleError, setTitleError] = useState(false);
     const [bodyError, setBodyError] = useState(false);
+    const {addToast} = useToast();
     //const [toasts, setToasts] = useState([]);
-    const toasts = useRef([]);
-    const [toastRerender, setToastRerender] = useState(false);
+    // const toasts = useRef([]);
+    // const [toastRerender, setToastRerender] = useState(false);
+    // const [toasts, addToast, deleteToast] = useToast();
 
     
 
@@ -60,7 +61,7 @@ const BlogForm = ({editing}) => {
                     text: 'Successfully created',
                     type: 'success'
                 });
-                //history.push('/admin');
+                history.push('/admin');
             });
         }
     }
@@ -80,7 +81,7 @@ const BlogForm = ({editing}) => {
                     text: 'Successfully created',
                     type: 'success'
                 });
-                //history.push('/admin');
+                history.push('/admin');
             })
         }
     };
@@ -116,30 +117,30 @@ const BlogForm = ({editing}) => {
         setPublish(e.target.checked);
     }
 
-    const deleteToast = (id) => {
-        const filteredToasts = toasts.current.filter(toast => {
-            return toast.id !== id;
-        });
-        toasts.current = filteredToasts;
-        setToastRerender(prev=>!prev);
-        //setToasts(filteredToast);
-    };
+    // const deleteToast = (id) => {
+    //     const filteredToasts = toasts.current.filter(toast => {
+    //         return toast.id !== id;
+    //     });
+    //     toasts.current = filteredToasts;
+    //     setToastRerender(prev=>!prev);
+    //     //setToasts(filteredToast);
+    // };
 
-    const addToast = (toast) =>{
-        const id = uuidv4();
-        const toastWidthId = {
-            ...toast,
-            id,
-        }
+    // const addToast = (toast) =>{
+    //     const id = uuidv4();
+    //     const toastWidthId = {
+    //         ...toast,
+    //         id,
+    //     }
 
-        //setToasts(prev=> [...prev, toastWidthId]);
-        toasts.current = [...toasts.current, toastWidthId];
-        setToastRerender(prev=>!prev);
+    //     //setToasts(prev=> [...prev, toastWidthId]);
+    //     toasts.current = [...toasts.current, toastWidthId];
+    //     setToastRerender(prev=>!prev);
 
-        setTimeout(() => {
-            deleteToast(id);
-        }, 3000);
-    };
+    //     setTimeout(() => {
+    //         deleteToast(id);
+    //     }, 3000);
+    // };
 
 
     useEffect(()=>{
@@ -153,7 +154,7 @@ const BlogForm = ({editing}) => {
 
     return (
         <div>
-            <Toast toasts={toasts.current} deleteToast={deleteToast}/>
+            {/* <Toast toasts={toasts} deleteToast={deleteToast}/> */}
             <h1>{editing?'Edit' : 'Create'} a blog post</h1>
             <div className='mb-3'>
                 <label className='form-label'>Title</label>

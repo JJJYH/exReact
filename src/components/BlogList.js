@@ -1,13 +1,12 @@
 import axios from "axios";
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Card from "../components/Card";
 import {useHistory} from 'react-router-dom';
 import LoadingSpinner from "../components/LoadingSpinner";
 import { bool } from 'prop-types';
 import Pagenation from "./Pagination";
 import { useLocation } from "react-router-dom";
-import Toast from "./Toast";
-import { v4 as uuidv4 } from 'uuid';
+import useToast from "../hooks/toast";
 
 const BlogList = ({isAdmin}) =>{
     
@@ -23,9 +22,13 @@ const BlogList = ({isAdmin}) =>{
     const [numberOfPages, setNumberOfPages] = useState(0);//총페이지
     const [searchText, setSearchText] = useState('');
     const [searchText2, setSearchText2] = useState('');
+    const {addToast}= useToast();
+
+    
     //const [toasts, setToasts] = useState([]);
-    const toasts = useRef([]);
-    const [toastRerender, setToastRerender] = useState(false);
+    // const toasts = useRef([]);
+    // const [toastRerender, setToastRerender] = useState(false);
+    // const [toasts, addToast, deleteToast] = useToast();
     const limit=2;
 
     
@@ -80,30 +83,30 @@ const BlogList = ({isAdmin}) =>{
         setNumberOfPages(Math.ceil(numberOfPosts/limit));
     },[numberOfPosts]);
 
-    const deleteToast = (id) => {
-        const filteredToasts = toasts.current.filter(toast => {
-            return toast.id !== id;
-        });
-        toasts.current = filteredToasts;
-        setToastRerender(prev=>!prev);
-        //setToasts(filteredToast);
-    };
+    // const deleteToast = (id) => {
+    //     const filteredToasts = toasts.current.filter(toast => {
+    //         return toast.id !== id;
+    //     });
+    //     toasts.current = filteredToasts;
+    //     setToastRerender(prev=>!prev);
+    //     //setToasts(filteredToast);
+    // };
 
-    const addToast = (toast) =>{
-        const id = uuidv4();
-        const toastWidthId = {
-            ...toast,
-            id,
-        }
+    // const addToast = (toast) =>{
+    //     const id = uuidv4();
+    //     const toastWidthId = {
+    //         ...toast,
+    //         id,
+    //     }
 
-        //setToasts(prev=> [...prev, toastWidthId]);
-        toasts.current = [...toasts.current, toastWidthId];
-        setToastRerender(prev=>!prev);
+    //     //setToasts(prev=> [...prev, toastWidthId]);
+    //     toasts.current = [...toasts.current, toastWidthId];
+    //     setToastRerender(prev=>!prev);
 
-        setTimeout(() => {
-            deleteToast(id);
-        }, 3000);
-    };
+    //     setTimeout(() => {
+    //         deleteToast(id);
+    //     }, 3000);
+    // };
 
     const deleteBlog = (e, id)=> {
         e.stopPropagation();
@@ -153,7 +156,7 @@ const BlogList = ({isAdmin}) =>{
 
     return(
         <div>
-            <Toast toasts={toasts.current} deleteToast={deleteToast}/>
+            {/* <Toast toasts={toasts} deleteToast={deleteToast}/> */}
             <input
                 type="text"
                 placeholder="Search..."

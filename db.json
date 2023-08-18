@@ -14,58 +14,10 @@
       "id": 2
     },
     {
-      "title": "추가해주세요",
-      "content": "추가할게요",
-      "createAt": 1691994547137,
-      "id": 3
-    },
-    {
-      "title": "asd",
+      "title": "123",
       "content": "qwe",
-      "publish": true,
-      "id": 4
-    },
-    {
-      "title": "asdqwe",
-      "content": "asd",
       "publish": false,
-      "id": 5
-    },
-    {
-      "title": "2",
-      "content": "124",
-      "publish": false,
-      "id": 15
-    },
-    {
-      "title": "223",
-      "content": "qweweq",
-      "publish": true,
-      "id": 16
-    },
-    {
-      "title": "qwe",
-      "content": "1234",
-      "publish": true,
-      "id": 17
-    },
-    {
-      "title": "awrere",
-      "content": "231",
-      "publish": false,
-      "id": 19
-    },
-    {
-      "title": "asd",
-      "content": "asd",
-      "publish": false,
-      "id": 24
-    },
-    {
-      "title": "dd",
-      "content": "dd",
-      "publish": false,
-      "id": 25
+      "id": 3
     }
   ]
 }
